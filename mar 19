@@ -1,0 +1,25 @@
+create  mobile apps early so data will be sent from  esp32 to mobile via ble
+creating new esp-idf modules as sensors read , ble, main
+FSR_glove/
+├── main/
+│   ├── CMakeLists.txt
+│   ├── main.c                 # Main application
+│   ├── fsr_reader.c           # FSR reading module
+│   ├── fsr_reader.h           # FSR header
+│   ├── ble_module.c           # BLE module
+│   └── ble_module.h           # BLE header
+└── CMakeLists.txt             # Top-level CMake
+Three Clean Modules
+Module	Responsibility	Key Features
+FSR Reader	Sensor reading	Raw ADC → voltage → pressure% → level (none/light/medium/hard)
+BLE Module	Wireless com	Advertises as "ESP32_FSR_Glove", sends formatted data
+Main	Orchestration	Two tasks: reading (100ms) + calibration (button-triggered)
+    if (data.pressure_percent < 5) {
+        data.level = PRESSURE_NONE;
+    } else if (data.pressure_percent < 30) {
+        data.level = PRESSURE_LIGHT;
+    } else if (data.pressure_percent < 70) {
+        data.level = PRESSURE_MEDIUM;
+    } else {
+        data.level = PRESSURE_HARD;
+    }
