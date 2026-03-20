@@ -1,5 +1,6 @@
 modifying firmware and testing ble  with real FSR
-even ADC gpio recomended it must be tested first!!!!!!!! some produce noise
+even ADC gpio recomended it must be tested first!!!!!!!! some not active and produce noise
+pressure distribution via adding peace of plastic 
                 
 3.3V ───── FSR ─────┬───── GPIO4 (ADC Input)
                     │
