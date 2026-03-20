@@ -1,0 +1,74 @@
+modifying firmware and testing ble  with real FSR
+even ADC gpio recomended it must be tested first!!!!!!!! some produce noise
+                
+3.3V ───── FSR ─────┬───── GPIO4 (ADC Input)
+                    │
+                   20kΩ Resistor
+                    │
+                   GND
+I (371) main_task: Calling app_main()
+I (371) FSR_DEMO: FSR Sensor with BLE Starting...
+I (371) FSR_DEMO: GPIO4: FSR input with 20k pull-down to GND
+I (381) FSR_READER: Initializing FSR reader...
+I (381) FSR_READER: FSR reader initialized
+I (381) FSR_DEMO: Press 'c' in monitor to calibrate, or wait 5s to continue
+I (5391) FSR_DEMO: Initializing BLE...
+I (5391) BLE_MODULE: Initializing BLE...
+I (5391) BLE_INIT: BT controller compile version [2edb0b0]
+I (5391) BLE_INIT: Using main XTAL as clock source
+I (5391) BLE_INIT: Feature Config, ADV:1, BLE_50:0, DTM:1, SCAN:1, CCA:0, SMP:1, CONNECT:1
+I (5401) BLE_INIT: Bluetooth MAC: 1c:db:d4:ab:64:fa
+I (5401) phy_init: phy_version 701,f4f1da3a,Mar  3 2025,15:50:10
+I (5461) BLE_MODULE: GATT registered
+I (5471) BLE_MODULE: BLE initialized
+I (6471) BLE_MODULE: Starting advertising...
+I (6471) BLE_MODULE: Adv data set complete
+I (6471) BLE_MODULE: ✅ Advertising started
+I (6471) FSR_DEMO: System ready!
+I (6471) FSR_DEMO: Look for 'ESP32_FSR_Glove' in BLE scanner
+I (6471) FSR_DEMO: Reading FSR every 5 seconds
+I (6481) FSR_DEMO: Starting FSR readings in 2 seconds...
+I (6481) main_task: Returned from app_main()
+
+=== RAW ADC DEBUG ===
+Raw ADC value: 664 (0-4095 range)
+Calculated voltage: 582 mV
+Pressure percentage: 16%
+Pressure level: LIGHT TOUCH
+=== END RAW ADC DEBUG ===
+
+
+=== FSR Reading #1 ===
+Raw ADC:  664 | Voltage:  582 mV | Pressure: LIGHT TOUCH (16%)
+========================
+W (8491) BLE_MODULE: Cannot send - not connected
+I (8491) BLE_MODULE: BLE Status - Connected: NO
+
+
+                   === FSR Reading #492 ===
+Raw ADC: 4095 | Voltage: 3165 mV | Pressure: HARD PRESS! (100%)
+========================
+W (2473531) FSR_DEMO: ⚠️  Sensor saturation! 20k resistor might be too low
+I (2473531) BLE_MODULE: BLE Send: FSR:4095,3165,HARD PRESS!
+I (2473541) BLE_MODULE: FSR Data: raw=4095, mV=3165, level=HARD PRESS!
+I (2473541) BLE_MODULE: BLE Status - Connected: YES
+
+=== RAW ADC DEBUG ===
+Raw ADC value: 203 (0-4095 range)
+Calculated voltage: 183 mV
+Pressure percentage: 4%
+Pressure level: NO TOUCH
+=== END RAW ADC DEBUG ===
+
+
+=== FSR Reading #493 ===
+Raw ADC:  203 | Voltage:  183 mV | Pressure: NO TOUCH (4%)
+========================
+I (2478561) BLE_MODULE: BLE Send: FSR:203,183,NO TOUCH
+I (2478561) BLE_MODULE: FSR Data: raw=203, mV=183, level=NO TOUCH
+I (2478571) BLE_MODULE: BLE Status - Connected: YES
+
+=== RAW ADC DEBUG ===
+Raw ADC value: 157 (0-4095 range)
+Calculated voltage: 142 mV
+Pressure percentage: 3%
