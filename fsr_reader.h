@@ -2,12 +2,14 @@
 #define FSR_READER_H
 
 #include <stdint.h>
+#include <stdbool.h>
+#include "fsr_data_types.h"
 
-// FSR channel configuration
-#define FSR_CHANNEL_COUNT 1  // Will expand to 8-10 with multiplexer
-#define FSR_ADC_CHANNEL ADC_CHANNEL_4  // GPIO4
+// Pin configuration for GPIO14 (ADC2_CH3)
+#define FSR_ADC_CHANNEL ADC_CHANNEL_3   // GPIO14 (ADC2_CH3)
+#define FSR_ADC_UNIT   ADC_UNIT_2
 
-// Pressure levels
+// Internal pressure levels
 typedef enum {
     PRESSURE_NONE = 0,
     PRESSURE_LIGHT,
@@ -15,26 +17,33 @@ typedef enum {
     PRESSURE_HARD
 } pressure_level_t;
 
-// FSR data structure
+// Internal data structure
 typedef struct {
     uint16_t raw_value;
     uint32_t voltage_mv;
     uint8_t  pressure_percent;
     pressure_level_t level;
-} fsr_data_t;
+    char    level_str[16];
+} fsr_internal_data_t;
 
-// Initialize FSR reader
+// Initialization
 void fsr_reader_init(void);
 
-// Read single FSR channel
-fsr_data_t fsr_read_channel(uint8_t channel);
+// Read a single channel
+fsr_internal_data_t fsr_read_channel(uint8_t channel);
 
-// Read all channels (for future multiplexer use)
-void fsr_read_all(fsr_data_t* data_array, uint8_t count);
+// Convert internal data to BLE format
+void fsr_to_ble_data(fsr_internal_data_t* internal, fsr_data_t* ble_data);
+
+// Read all channels
+void fsr_read_all(fsr_internal_data_t* data_array, uint8_t count);
 
 // Calibration functions
 void fsr_calibrate_min(void);
 void fsr_calibrate_max(void);
 void fsr_set_calibration(uint16_t min, uint16_t max);
+bool fsr_is_calibrated(void);
+
+const char* fsr_get_level_string(pressure_level_t level);
 
 #endif // FSR_READER_H
