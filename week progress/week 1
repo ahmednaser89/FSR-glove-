@@ -1,0 +1,21 @@
+ Project Update: FSR Glove Development
+
+- Component selection: Completed searching, comparing, and purchasing of key parts.  
+- FSR sensors (Interlink): Analysis and implementation plan finalized.  
+- Mobile app development: Started early using MIT App Inventor for Android—allows rapid BLE testing.  
+- BLE testing strategy:  
+  - Initially simulated FSRs using wired resistors as fake sensors.  
+  - Sent fake data from ESP32 to mobile via BLE for end-to-end validation.  
+  - Successfully modified and tested firmware with simulated inputs.  
+  - Now testing with real FSR sensors—firmware updated accordingly.  
+- Progress: Phase 1a and part of 1c (as per your request) are complete.  
+- Documentation: Video recordings of tests and demos have been created.  
+
+ Current Issue:
+- Sensitivity needs improvement:  
+  - Medium and hard touches work well.  
+  - Light touch is not reliably detected—likely due to FSR threshold or ADC calibration.  
+
+Next step: Adjust firmware sensitivity (e.g., lower detection threshold, add hysteresis, or implement software filtering) to capture light touches accurately.
+
+---
