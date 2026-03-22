@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "fsr_data_types.h"  // Include the shared type
+#include "fsr_data_types.h"
 
 // Initialize BLE
 void ble_module_init(void);

@@ -43,7 +43,8 @@ void fsr_calibrate_min(void);
 void fsr_calibrate_max(void);
 void fsr_set_calibration(uint16_t min, uint16_t max);
 bool fsr_is_calibrated(void);
-
+void fsr_save_calibration(void);
+bool fsr_load_calibration(void);
 const char* fsr_get_level_string(pressure_level_t level);
 
 #endif // FSR_READER_H

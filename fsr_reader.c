@@ -5,18 +5,63 @@
 #include "esp_adc/adc_cali_scheme.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "nvs_flash.h"
+#include "nvs.h"
 #include <stdio.h>
 
 static const char *TAG = "FSR_READER";
 
+// ADC handles
 static adc_oneshot_unit_handle_t adc_handle = NULL;
 static adc_cali_handle_t cali_handle = NULL;
 static bool is_initialized = false;
 
-// Calibration values
+// Calibration values (must be declared before NVS functions)
 static uint16_t cal_min = 0;
 static uint16_t cal_max = 4095;
 static bool calibrated = false;
+
+#define NVS_NAMESPACE "fsr_cal"
+
+void fsr_save_calibration(void) {
+    nvs_handle_t my_handle;
+    esp_err_t err = nvs_open(NVS_NAMESPACE, NVS_READWRITE, &my_handle);
+    if (err != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to open NVS for save: %s", esp_err_to_name(err));
+        return;
+    }
+
+    nvs_set_u16(my_handle, "min", cal_min);
+    nvs_set_u16(my_handle, "max", cal_max);
+    nvs_commit(my_handle);
+    nvs_close(my_handle);
+    ESP_LOGI(TAG, "Calibration saved to NVS: min=%d, max=%d", cal_min, cal_max);
+}
+
+bool fsr_load_calibration(void) {
+    nvs_handle_t my_handle;
+    esp_err_t err = nvs_open(NVS_NAMESPACE, NVS_READONLY, &my_handle);
+    if (err != ESP_OK) {
+        ESP_LOGW(TAG, "No saved calibration found");
+        return false;
+    }
+
+    uint16_t nvs_min, nvs_max;
+    esp_err_t err_min = nvs_get_u16(my_handle, "min", &nvs_min);
+    esp_err_t err_max = nvs_get_u16(my_handle, "max", &nvs_max);
+    nvs_close(my_handle);
+
+    if (err_min == ESP_OK && err_max == ESP_OK) {
+        cal_min = nvs_min;
+        cal_max = nvs_max;
+        calibrated = true;
+        ESP_LOGI(TAG, "Loaded calibration from NVS: min=%d, max=%d", cal_min, cal_max);
+        return true;
+    }
+    
+    ESP_LOGW(TAG, "Failed to load calibration from NVS");
+    return false;
+}
 
 void fsr_reader_init(void)
 {
@@ -113,10 +158,6 @@ fsr_internal_data_t fsr_read_channel(uint8_t channel)
         }
     }
     
-    // Print raw value immediately (debug)
-    printf("\r\033[KRaw ADC: %4d  ", data.raw_value);
-    fflush(stdout);
-    
     // Calculate pressure percentage
     if (calibrated && cal_max > cal_min) {
         if (data.raw_value <= cal_min) {
@@ -163,8 +204,8 @@ void fsr_calibrate_min(void)
 {
     if (!is_initialized) fsr_reader_init();
     
-    ESP_LOGI(TAG, "Calibrating MIN – keep sensor untouched...");
-    vTaskDelay(pdMS_TO_TICKS(2000));
+    ESP_LOGI(TAG, "Calibrating MIN – DO NOT TOUCH sensor for 5 seconds...");
+    vTaskDelay(pdMS_TO_TICKS(5000));
     
     uint32_t sum = 0;
     int val;
@@ -182,8 +223,8 @@ void fsr_calibrate_max(void)
 {
     if (!is_initialized) fsr_reader_init();
     
-    ESP_LOGI(TAG, "Calibrating MAX – press HARD on sensor...");
-    vTaskDelay(pdMS_TO_TICKS(2000));
+    ESP_LOGI(TAG, "Calibrating MAX – press HARD on sensor for 5 seconds...");
+    vTaskDelay(pdMS_TO_TICKS(5000));
     
     uint32_t max = 0;
     int val;
