@@ -5,3 +5,99 @@
                    GND
 calbration added
 readme added
+
+## 1. **Fixed Stack Overflow in BLE Status Task**
+- **Problem**: The `ble_status_task` was crashing with a stack overflow (2048 bytes insufficient).
+- **Solution**: Increased its stack size to 4096 bytes (later disabled it completely to reduce overhead).
+
+## 2. **Eliminated MTU‑Related Disconnections**
+- **Problem**: Notifications longer than 20 bytes triggered `attribute value too long` warnings, followed by client disconnects (reason 0x13).
+- **Solution**: Simplified the BLE data to send only the raw ADC value (e.g., `"3245"`), which always fits within the MTU. Also removed duplicate transmissions.
+
+## 3. **Reduced BLE Traffic to Improve Stability**
+- **Problem**: Sending data at 10 Hz caused potential BLE stack overload.
+- **Solution**: Throttled BLE notifications to 2 Hz (500 ms interval) while keeping the ADC reading at 100 Hz for local display.
+
+## 4. **Improved Connection Robustness**
+- **Problem**: Even with nRF Connect, disconnections occurred (reason 0x13), indicating supervision timeout or stack issues.
+- **Solution**: Added connection parameter update after connection to request a longer supervision timeout (4 seconds) and stable connection intervals, reducing the chance of accidental timeouts.
+
+## 5. **Simplified the Software Architecture**
+- Removed the `ble_status_task` to free resources and reduce logging clutter.
+- Removed the `fsr_data_t` structure and `ble_send_fsr_data` call – now only `ble_send_pressure_string` is used.
+- The `fsr_monitor_task` now reads the ADC, updates the console every 10 ms, and sends BLE notifications every 500 ms.
+
+## 6. **Confirmed Stable Operation**
+- Tested with both nRF Connect and MIT App Inventor.
+- No more stack overflows, MTU warnings, or unexpected crashes.
+- The remaining disconnects are clean client‑initiated terminations (e.g., when the app is closed), and the ESP32 correctly restarts advertising.
+
+## 7. **Created Comprehensive Documentation**
+- Prepared a detailed `README.md` covering hardware wiring, software structure, calibration, BLE service details, troubleshooting, and usage with MIT App Inventor.
+
+## Current System State
+- **BLE Device Name**: `ESP32 FSR Glove`
+- **Data Sent**: Raw ADC value (0–4095) as a string, every 500 ms when notifications are enabled.
+- **Commands**: Write `"CAL"` to trigger recalibration.
+- **Console Output**: Live display of ADC, voltage, pressure level, percentage, and a bar graph.
+- **Stability**: The system runs indefinitely without crashes; disconnects only happen when the client app closes.
+ADC:    3 |    1 mV | NO TOUCH     |   0% [....................]I (96009) BLE_GATT: 📤 Sent: 3
+ADC:    6 |    4 mV | NO TOUCH     |   0% [....................]I (96509) BLE_GATT: 📤 Sent: 6
+ADC:    4 |    2 mV | NO TOUCH     |   0% [....................]I (97009) BLE_GATT: 📤 Sent: 4
+ADC:    4 |    2 mV | NO TOUCH     |   0% [....................]I (97299) BLE_GATT: 📝 GATT Write, handle: 42, len: 4
+I (97299) BLE_GATT: 📢 Calibration command received!
+I (97299) BLE_GATT: Starting calibration task...
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (97399) BLE_GATT: Calibrating MIN - DO NOT TOUCH sensor
+I (97399) FSR_READER: Calibrating MIN – DO NOT TOUCH sensor for 5 seconds...
+ADC:    6 |    4 mV | NO TOUCH     |   0% [....................]I (97509) BLE_GATT: 📤 Sent: 6
+ADC:   20 |   17 mV | NO TOUCH     |   0% [....................]I (98009) BLE_GATT: 📤 Sent: 20
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (98509) BLE_GATT: 📤 Sent: 5
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (99009) BLE_GATT: 📤 Sent: 5
+ADC:    6 |    4 mV | NO TOUCH     |   0% [....................]I (99509) BLE_GATT: 📤 Sent: 6
+ADC:    4 |    2 mV | NO TOUCH     |   0% [....................]I (100009) BLE_GATT: 📤 Sent: 4
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (100509) BLE_GATT: 📤 Sent: 5
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (101009) BLE_GATT: 📤 Sent: 5
+ADC:    6 |    4 mV | NO TOUCH     |   0% [....................]I (101509) BLE_GATT: 📤 Sent: 6
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (102009) BLE_GATT: 📤 Sent: 5
+ADC:    3 |    1 mV | NO TOUCH     |   0% [....................]I (102509) BLE_GATT: 📤 Sent: 3
+ADC:    7 |    5 mV | NO TOUCH     |   0% [....................]I (102899) FSR_READER: MIN calibration complete: 4
+ADC:   10 |    7 mV | NO TOUCH     |   0% [....................]I (102999) BLE_GATT: Calibrating MAX - PRESS HARD on sensor NOW
+I (102999) FSR_READER: Calibrating MAX – press HARD on sensor for 5 seconds...
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (103009) BLE_GATT: 📤 Sent: 5
+ADC:    6 |    4 mV | NO TOUCH     |   0% [....................]I (103509) BLE_GATT: 📤 Sent: 6
+ADC: 3399 | 2838 mV | HARD PRESS!  |  86% [#################...]I (104009) BLE_GATT: 📤 Sent: 3399
+ADC: 3685 | 3001 mV | HARD PRESS!  |  93% [##################..]I (104509) BLE_GATT: 📤 Sent: 3685
+ADC: 3983 | 4968 mV | HARD PRESS!  | 100% [####################]I (105009) BLE_GATT: 📤 Sent: 3983
+ADC: 3979 | 3122 mV | HARD PRESS!  | 100% [####################]I (105509) BLE_GATT: 📤 Sent: 3979
+ADC: 3948 | 3112 mV | HARD PRESS!  | 100% [####################]I (106009) BLE_GATT: 📤 Sent: 3948
+ADC: 3956 | 3116 mV | HARD PRESS!  | 100% [####################]I (106509) BLE_GATT: 📤 Sent: 3956
+ADC: 3958 | 3116 mV | HARD PRESS!  | 100% [####################]I (107009) BLE_GATT: 📤 Sent: 3958
+ADC: 3935 | 3107 mV | HARD PRESS!  | 100% [####################]I (107509) BLE_GATT: 📤 Sent: 3935
+ADC: 3443 | 2865 mV | HARD PRESS!  |  87% [#################...]I (108009) BLE_GATT: 📤 Sent: 3443
+ADC:    2 |    0 mV | NO TOUCH     |   0% [....................]I (108499) FSR_READER: MAX calibration complete: 3465
+ADC:    3 |    1 mV | NO TOUCH     |   0% [....................]I (108509) BLE_GATT: 📤 Sent: 3
+ADC:   19 |   16 mV | NO TOUCH     |   0% [....................]I (108599) BLE_GATT: Saving calibration to NVS
+ADC:    3 |    1 mV | NO TOUCH     |   0% [....................]I (108609) FSR_READER: Calibration saved to NVS: min=4, max=3465
+I (108609) BLE_GATT: ✅ Calibration complete!
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (109009) BLE_GATT: 📤 Sent: 5
+ADC:    6 |    4 mV | NO TOUCH     |   0% [....................]I (109509) BLE_GATT: 📤 Sent: 6
+ADC:    4 |    2 mV | NO TOUCH     |   0% [....................]I (110009) BLE_GATT: 📤 Sent: 4
+ADC:    3 |    1 mV | NO TOUCH     |   0% [....................]I (110509) BLE_GATT: 📤 Sent: 3
+ADC:    7 |    5 mV | NO TOUCH     |   0% [....................]I (111009) BLE_GATT: 📤 Sent: 7
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (111509) BLE_GATT: 📤 Sent: 5
+ADC:    4 |    2 mV | NO TOUCH     |   0% [....................]I (112009) BLE_GATT: 📤 Sent: 4
+ADC:    4 |    2 mV | NO TOUCH     |   0% [....................]I (112509) BLE_GATT: 📤 Sent: 4
+ADC:    3 |    1 mV | NO TOUCH     |   0% [....................]I (113009) BLE_GATT: 📤 Sent: 3
+ADC:    3 |    1 mV | NO TOUCH     |   0% [....................]I (113509) BLE_GATT: 📤 Sent: 3
+ADC:    0 |    0 mV | NO TOUCH     |   0% [....................]I (114009) BLE_GATT: 📤 Sent: 0
+ADC: 2004 | 1741 mV | MEDIUM PRESS |  57% [###########.........]I (114509) BLE_GATT: 📤 Sent: 2004
+ADC: 3175 | 2690 mV | HARD PRESS!  |  91% [##################..]I (115009) BLE_GATT: 📤 Sent: 3175
+ADC:    4 |    2 mV | NO TOUCH     |   0% [....................]I (115509) BLE_GATT: 📤 Sent: 4
+ADC:    7 |    5 mV | NO TOUCH     |   0% [....................]I (116009) BLE_GATT: 📤 Sent: 7
+ADC: 2323 | 2013 mV | MEDIUM PRESS |  67% [#############.......]I (116509) BLE_GATT: 📤 Sent: 2323
+ADC: 3045 | 2595 mV | HARD PRESS!  |  87% [#################...]I (117009) BLE_GATT: 📤 Sent: 3045
+ADC: 3435 | 2861 mV | HARD PRESS!  |  99% [###################.]I (117509) BLE_GATT: 📤 Sent: 3435
+ADC: 3037 | 2588 mV | HARD PRESS!  |  87% [#################...]I (118009) BLE_GATT: 📤 Sent: 3037
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (118509) BLE_GATT: 📤 Sent: 5
+ADC:    0 |    0 mV | NO TOUCH     |   0% [....................]I (119009) BLE_GATT: 📤 Sent: 0
+
