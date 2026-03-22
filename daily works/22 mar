@@ -1,0 +1,7 @@
+3.3V ───── FSR ─────┬───── GPIO14 (ADC Input)
+                    │
+                   xx Resistor must be 1-3k ohm for enhancing the stabilty 
+                    │
+                   GND
+calbration added
+readme added
