@@ -1,0 +1,44 @@
+ADC:    7 |    5 mV | NO TOUCH     |   0% [....................]I (95009) BLE_GATT: 📤 Sent: 7
+ADC:   13 |   10 mV | NO TOUCH     |   0% [....................]I (95509) BLE_GATT: 📤 Sent: 13
+ADC:    3 |    1 mV | NO TOUCH     |   0% [....................]I (96009) BLE_GATT: 📤 Sent: 3
+ADC:    6 |    4 mV | NO TOUCH     |   0% [....................]I (96509) BLE_GATT: 📤 Sent: 6
+ADC:    4 |    2 mV | NO TOUCH     |   0% [....................]I (97009) BLE_GATT: 📤 Sent: 4
+ADC:    4 |    2 mV | NO TOUCH     |   0% [....................]I (97299) BLE_GATT: 📝 GATT Write, handle: 42, len: 4
+I (97299) BLE_GATT: 📢 Calibration command received!
+I (97299) BLE_GATT: Starting calibration task...
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (97399) BLE_GATT: Calibrating MIN - DO NOT TOUCH sensor
+I (97399) FSR_READER: Calibrating MIN – DO NOT TOUCH sensor for 5 seconds...
+ADC:    6 |    4 mV | NO TOUCH     |   0% [....................]I (97509) BLE_GATT: 📤 Sent: 6
+ADC:   20 |   17 mV | NO TOUCH     |   0% [....................]I (98009) BLE_GATT: 📤 Sent: 20
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (98509) BLE_GATT: 📤 Sent: 5
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (99009) BLE_GATT: 📤 Sent: 5
+ADC:    6 |    4 mV | NO TOUCH     |   0% [....................]I (99509) BLE_GATT: 📤 Sent: 6
+ADC:    4 |    2 mV | NO TOUCH     |   0% [....................]I (100009) BLE_GATT: 📤 Sent: 4
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (100509) BLE_GATT: 📤 Sent: 5
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (101009) BLE_GATT: 📤 Sent: 5
+ADC:    6 |    4 mV | NO TOUCH     |   0% [....................]I (101509) BLE_GATT: 📤 Sent: 6
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (102009) BLE_GATT: 📤 Sent: 5
+ADC:    3 |    1 mV | NO TOUCH     |   0% [....................]I (102509) BLE_GATT: 📤 Sent: 3
+ADC:    7 |    5 mV | NO TOUCH     |   0% [....................]I (102899) FSR_READER: MIN calibration complete: 4
+ADC:   10 |    7 mV | NO TOUCH     |   0% [....................]I (102999) BLE_GATT: Calibrating MAX - PRESS HARD on sensor NOW
+I (102999) FSR_READER: Calibrating MAX – press HARD on sensor for 5 seconds...
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (103009) BLE_GATT: 📤 Sent: 5
+ADC:    6 |    4 mV | NO TOUCH     |   0% [....................]I (103509) BLE_GATT: 📤 Sent: 6
+ADC: 3399 | 2838 mV | HARD PRESS!  |  86% [#################...]I (104009) BLE_GATT: 📤 Sent: 3399
+ADC: 3685 | 3001 mV | HARD PRESS!  |  93% [##################..]I (104509) BLE_GATT: 📤 Sent: 3685
+ADC: 3983 | 4968 mV | HARD PRESS!  | 100% [####################]I (105009) BLE_GATT: 📤 Sent: 3983
+ADC: 3979 | 3122 mV | HARD PRESS!  | 100% [####################]I (105509) BLE_GATT: 📤 Sent: 3979
+ADC: 3948 | 3112 mV | HARD PRESS!  | 100% [####################]I (106009) BLE_GATT: 📤 Sent: 3948
+ADC: 3956 | 3116 mV | HARD PRESS!  | 100% [####################]I (106509) BLE_GATT: 📤 Sent: 3956
+ADC: 3958 | 3116 mV | HARD PRESS!  | 100% [####################]I (107009) BLE_GATT: 📤 Sent: 3958
+ADC: 3935 | 3107 mV | HARD PRESS!  | 100% [####################]I (107509) BLE_GATT: 📤 Sent: 3935
+ADC: 3443 | 2865 mV | HARD PRESS!  |  87% [#################...]I (108009) BLE_GATT: 📤 Sent: 3443
+ADC:    2 |    0 mV | NO TOUCH     |   0% [....................]I (108499) FSR_READER: MAX calibration complete: 3465
+ADC:    3 |    1 mV | NO TOUCH     |   0% [....................]I (108509) BLE_GATT: 📤 Sent: 3
+ADC:   19 |   16 mV | NO TOUCH     |   0% [....................]I (108599) BLE_GATT: Saving calibration to NVS
+ADC:    3 |    1 mV | NO TOUCH     |   0% [....................]I (108609) FSR_READER: Calibration saved to NVS: min=4, max=3465
+I (108609) BLE_GATT: ✅ Calibration complete!
+ADC:    5 |    3 mV | NO TOUCH     |   0% [....................]I (109009) BLE_GATT: 📤 Sent: 5
+ADC:    6 |    4 mV | NO TOUCH     |   0% [....................]I (109509) BLE_GATT: 📤 Sent: 6
+ADC:    4 |    2 mV | NO TOUCH     |   0% [....................]I (110009) BLE_GATT: 📤 Sent: 4
+ADC:    3 |    1 mV | NO TOUCH     |   0% [....................]I (110509) BLE_GATT: 📤 Sent: 3
