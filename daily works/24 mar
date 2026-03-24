@@ -1,0 +1,172 @@
+First result : 10:26 to 02:00 am finding connectors for fsr( i have to fit by myself the wires since no 1 mm pitch in market) and ics (dupont 2.54 pitch 40 pcs addedd to shoping card) ,  others as recording videos ... 2 hours
+
+
+
+Second result : 14:09 to 16:25   2 hours
+ 2. Evaluate sensor noise characteristics under various conditions
+
+- Understand how stable the readings are and what affects noise.
+
+via:
+Test the sensor under different conditions:
+
+    Static pressure (holding steady) – measure standard deviation
+
+    Dynamic pressure (tapping, squeezing) – measure response consistency
+
+    Vibration – my mobile vibration
+
+Test Results Summary
+
+We ran a complete sensor evaluation sequence on the ESP32‑based FSR glove prototype. The system performed three 5‑minute tests: static pressure, dynamic pressure, and vibration sensitivity. Each test was preceded by a 60‑second preparation period. All measurements were taken at 50 Hz (static/dynamic) or 100 Hz (vibration) using a calibrated FSR with 10 kΩ pull‑down resistor on GPIO14 (ADC2_CH3). The raw ADC values (0–4095) were logged and analyzed.
+1. Static Pressure Test (5 minutes)
+
+Setup: The user applied a steady, constant pressure to the sensor for the entire 5‑minute period.
+
+Results:
+
+    Mean ADC value: 2727
+
+    Range (min–max): 2694 – 2764 (Δ = 70)
+
+    Standard deviation: 2.73
+
+    Coefficient of variation (CV): 0.10%
+
+The histogram shows that over 10,000 of the 15,000 samples fell within the narrow band of 2727–2729 ADC, indicating exceptional stability. The low CV (0.10%) confirms negligible noise under static load.
+
+Interpretation: The sensor exhibits excellent repeatability and low drift when held at a constant pressure, making it suitable for applications requiring stable pressure sensing (e.g., grip force monitoring).
+2. Dynamic Pressure Test (5 minutes)
+
+Setup: The user performed repeated taps and squeezes on the sensor during the 5‑minute period.
+
+Results:
+
+    Mean ADC: 2990
+
+    Range: 2 – 3795 (Δ = 3793)
+
+    Standard deviation: 302.20
+
+    CV: 10.11%
+
+    Fastest response time: 138 180 ms (≈2.3 minutes)
+
+    Approximate press count: 3
+
+Observations:
+The wide range and high CV reflect the dynamic nature of the test (full release to hard press). However, the computed “fastest response time” is misleading – it represents the time between the minimum and maximum readings across the entire 5‑minute dataset, not a single press. The low press count (3) suggests that the user performed only a few deliberate presses rather than a steady rhythm. For a proper dynamic evaluation, we recommend a dedicated test with a defined tapping rate (e.g., once every 2 seconds) to assess response time and consistency.
+
+Interpretation: The sensor reliably captures large pressure changes, but response time data requires a more controlled protocol.
+3. Vibration Sensitivity Test (5 minutes)
+
+Setup: my mobile vibration.
+
+Results:
+
+    Mean ADC: 3275
+
+    Range: 143 – 3480 (Δ = 3337)
+
+    Standard deviation: 165.75
+
+    CV: 5.06%
+
+    Significant noise events: 924
+
+    Event rate: 3.1 events/second
+
+Observations:
+The mean reading remained high (near the “hard press” region) because the sensor was under continuous light pressure. The vibration events caused momentary dips in the reading, visible in the histogram as a spread towards lower ADC values. The event rate of 3.1 Hz indicates that the sensor is sensitive to mechanical vibrations, which could be a concern in a wearable glove if wires are not properly strain‑relieved.
+
+Interpretation: The sensor’s output is influenced by mechanical vibrations transmitted through the wires. This can be mitigated by using flexible, strain‑relieved wiring (e.g., silicone wire or conductive yarn with a strain relief loop) and securing the sensor firmly to the glove.
+Conclusions & Recommendations
+
+    Noise & Stability: The FSR, with proper calibration, delivers very low noise (<0.2% CV) under constant pressure.
+
+    Dynamic Response: The sensor responds quickly to pressure changes, but response time measurements require a controlled tapping protocol.
+
+    Vibration Sensitivity: The sensor is susceptible to vibrations from the leads. Use flexible, strain‑relieved wiring and consider a soft encapsulation (e.g., silicone) to dampen mechanical noise.
+
+    Overall: The ESP32‑based FSR glove is suitable for the intended application. Further optimisation of wiring and mechanical integration will improve reliability under dynamic use.
+
+
+
+
+
+third result : 19:35 to 22:00   1 h
+
+Temperature Test Results
+Room Temperature Baseline (Valid)
+
+Condition: Glass of water at room temperature, properly loaded on sensor.
+Metric	Value
+Mean ADC	3654
+Min ADC	3574
+Max ADC	3736
+Range	162
+Standard Deviation	8.53
+Coefficient of Variation	0.23%
+Stability	Excellent
+
+Interpretation: The sensor shows outstanding stability under constant load at room temperature. The 0.23% CV indicates minimal noise and drift during the 30-second measurement period.
+Warm Water Test (Invalid – Discarded)
+
+Condition: Glass with warm water (40‑50°C) was placed, but the weight was not properly positioned, causing intermittent contact. No valid data to compare.
+
+Action Required: Repeat test ensuring the weight applies the same pressure as the baseline (ADC ≈ 3650).
+Humidity Test Results
+Dry Baseline (Valid)
+
+Condition: Sensor dry, weight properly applied.
+Metric	Value
+Mean ADC	2178
+Min ADC	1259
+Max ADC	2667
+Range	1408
+Standard Deviation	225.8
+Coefficient of Variation	10.4%
+Stability	Moderate
+
+Interpretation: The sensor shows reasonable stability under dry conditions. The higher CV (10.4%) compared to the previous test (0.23%) suggests the weight may have been positioned differently, resulting in lower overall pressure.
+Wet Sensor Test (Partially Valid)
+
+Condition: Water drops added to sensor surface, weight reapplied.
+Metric	Value
+Mean ADC	3047*
+Min ADC	2672*
+Max ADC	3339*
+Change from Dry	+869 ADC (+40%)
+
+*Values calculated using the portion where sensor was under load (ignoring zero/low readings at start).
+
+Interpretation: When moisture was present on the sensing surface, the ADC increased significantly (about 40%). This suggests that water on the FSR surface changes the electrical characteristics, potentially due to increased conductivity between the sensing layers.
+
+
+Time Drift Test Results (20 Minutes)
+
+ time drift test ran successfully with proper load applied. 
+
+    Duration: 20 minutes (1,200 samples at 1 Hz)
+
+    Load: Constant weight applied throughout (ADC range 3225–3365)
+
+    Stability: Excellent
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+total : 5 hours
+
