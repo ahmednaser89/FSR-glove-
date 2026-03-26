@@ -1,0 +1,526 @@
+First result : 10:00 t0 10:30 arranging and rerecording Evaluate sensor noise characteristics under various conditions ...30 min
+
+
+Second result : 22:50 to 11:23 , 09:48 to 11:08, 11:43 to 16:20 , 19:00 to 19:20 33+80+ 4.23 = 6.16
+hhh@hhh-laptop:~/Desktop/Glove Grip FSR/FSR_glove$ idf.py monitor 
+Executing action: monitor
+Serial port /dev/ttyACM0
+Connecting....
+Detecting chip type... ESP32-S3
+Running idf_monitor in directory '/home/hhh/Desktop/Glove Grip FSR/FSR_glove'
+Executing "/home/hhh/.espressif/python_env/idf5.5_py3.9_env/bin/python /home/hhh/esp/esp-idf-v5.5.1/tools/idf_monitor.py -p /dev/ttyACM0 -b 115200 --toolchain-prefix xtensa-esp32s3-elf- --target esp32s3 --revision 0 '/home/hhh/Desktop/Glove Grip FSR/FSR_glove/build/FSR_glove.elf' '/home/hhh/Desktop/Glove Grip FSR/FSR_glove/build/bootloader/bootloader.elf' -m '/home/hhh/.espressif/python_env/idf5.5_py3.9_env/bin/python' '/home/hhh/esp/esp-idf-v5.5.1/tools/idf.py'"...
+--- esp-idf-monitor 1.9.0 on /dev/ttyACM0 115200
+--- Quit: Ctrl+] | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0x8 (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x158c
+load:0x403c8700,len:0xd24
+--- 0x403c8700: _stext at ??:?
+load:0x403cb700,len:0x2f34
+entry 0x403c8924
+--- 0x403c8924: call_start_cpu0 at /home/hhh/esp/esp-idf-v5.5.1/components/bootloader/subproject/main/bootloader_start.c:25
+I (24) boot: ESP-IDF v5.5.1-dirty 2nd stage bootloader
+I (25) boot: compile time Mar 22 2026 21:12:54
+I (25) boot: Multicore bootloader
+I (25) boot: chip revision: v0.2
+I (28) boot: efuse block revision: v1.3
+I (32) boot.esp32s3: Boot SPI Speed : 80MHz
+I (36) boot.esp32s3: SPI Mode       : DIO
+I (39) boot.esp32s3: SPI Flash Size : 2MB
+I (43) boot: Enabling RNG early entropy source...
+I (48) boot: Partition Table:
+I (50) boot: ## Label            Usage          Type ST Offset   Length
+I (57) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (63) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (70) boot:  2 factory          factory app      00 00 00010000 00100000
+I (76) boot: End of partition table
+I (79) esp_image: segment 0: paddr=00010020 vaddr=3c080020 size=22ccch (142540) map
+I (112) esp_image: segment 1: paddr=00032cf4 vaddr=3fc98b00 size=03e50h ( 15952) load
+I (116) esp_image: segment 2: paddr=00036b4c vaddr=40374000 size=094cch ( 38092) load
+I (124) esp_image: segment 3: paddr=00040020 vaddr=42000020 size=7a778h (501624) map
+I (213) esp_image: segment 4: paddr=000ba7a0 vaddr=4037d4cc size=0b624h ( 46628) load
+I (223) esp_image: segment 5: paddr=000c5dcc vaddr=50000000 size=00020h (    32) load
+I (232) boot: Loaded app from partition at offset 0x10000
+I (232) boot: Disabling RNG early entropy source...
+I (242) cpu_start: Multicore app
+I (251) cpu_start: Pro cpu start user code
+I (251) cpu_start: cpu freq: 160000000 Hz
+I (251) app_init: Application information:
+I (251) app_init: Project name:     FSR_glove
+I (255) app_init: App version:      1
+I (259) app_init: Compile time:     Mar 22 2026 21:12:32
+I (264) app_init: ELF file SHA256:  0859cc5c7...
+I (268) app_init: ESP-IDF:          v5.5.1-dirty
+I (272) efuse_init: Min chip rev:     v0.0
+I (276) efuse_init: Max chip rev:     v0.99 
+I (280) efuse_init: Chip rev:         v0.2
+I (284) heap_init: Initializing. RAM available for dynamic allocation:
+I (290) heap_init: At 3FCA06E8 len 00049028 (292 KiB): RAM
+I (295) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM
+I (301) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM
+I (306) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM
+I (312) spi_flash: detected chip: boya
+I (315) spi_flash: flash io: dio
+W (317) spi_flash: Detected size(16384k) larger than the size in the binary image header(2048k). Using the size in the binary image header.
+I (330) sleep_gpio: Configure to isolate all GPIO pins in sleep state
+I (336) sleep_gpio: Enable automatic switching of GPIO sleep configuration
+I (343) coexist: coex firmware version: b0bcc39
+I (361) coexist: coexist rom version e7ae62f
+I (362) main_task: Started on CPU0
+I (372) main_task: Calling app_main()
+I (372) FSR Glove: FSR Glove Starting with 10kΩ resistor on GPIO14
+I (372) FSR Glove: Wiring: 3.3V → FSR → GPIO14 → 3kΩ → GND
+I (382) FSR_READER: Initializing FSR reader on GPIO14 (ADC2_CH3) with 10kΩ resistor...
+I (392) FSR_READER: ADC calibration initialized
+I (392) FSR_READER: ADC2 initialized on GPIO14
+I (392) FSR_READER: Loaded calibration from NVS
+I (402) FSR_READER: Calibration set: NO=3, TINY=1988, LIGHT=3407, MED=3701, HARD=3946, VERY=4095
+I (402) FSR Glove: Calibration loaded from NVS
+I (412) FSR Glove: Initializing BLE...
+I (412) BLE_GATT: Initializing BLE...
+I (412) BLE_INIT: BT controller compile version [2edb0b0]
+I (422) BLE_INIT: Using main XTAL as clock source
+I (422) BLE_INIT: Feature Config, ADV:1, BLE_50:0, DTM:1, SCAN:1, CCA:0, SMP:1, CONNECT:1
+I (432) BLE_INIT: Bluetooth MAC: 1c:db:d4:ab:64:fa
+I (442) phy_init: phy_version 701,f4f1da3a,Mar  3 2025,15:50:10
+I (502) BLE_GATT: GATT registered, app_id: 0
+I (502) BLE_GATT: Service created, service_handle: 40
+I (502) BLE_GATT: Characteristic added, handle: 42
+I (502) BLE_GATT: Descriptor added, handle: 43
+I (512) BLE_GATT: Service started - ready for connections!
+I (512) BLE_GATT: BLE initialized
+I (1512) BLE_GATT: Starting advertising...
+W (1512) BT_BTM: BTM_BleWriteAdvData, Partial data write into ADV
+I (1512) BLE_GATT: Adv data set complete
+I (1512) BLE_GATT: ✅ Advertising started
+I (1512) FSR Glove: System ready!
+I (1512) FSR Glove: Look for 'ESP32 FSR Glove' in BLE scanner
+I (1522) BLE_GATT: BLE - Connected: NO, Notifications: OFF, conn_id: 0, char: 42
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  🧪 FSR SENSOR TEST SUITE - FULL CHARACTERIZATION            ║
+║  ──────────────────────────────────────────────────────────── ║
+║  This suite will run 10 comprehensive tests                  ║
+║  Total estimated time: ~45-60 minutes                        ║
+╚════════════════════════════════════════════════════════════════╝
+⏸️  FSR monitor paused
+⏸️  BLE status task paused
+I (1602) main_task: Returned from app_main()
+
+╔════════════════════════════════════════════════════════════════╗
+║  🔍 ADC QUICK CHECK                                            ║
+╚════════════════════════════════════════════════════════════════╝
+   Sample 1: 2827
+   Sample 2: 2835
+   Sample 3: 2839
+   Sample 4: 2838
+   Sample 5: 2837
+
+   ✅ ADC OK | Avg: 2835 | Range: 2827-2839
+   ✅ ADC is functioning properly
+
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  ⚠️  PREPARING TEST 1: STATIC PRESSURE                        ║
+║  ──────────────────────────────────────────────────────────── ║
+║  Apply steady pressure on the sensor and maintain it.        ║
+║  Use a weight or consistent finger pressure.                 ║
+║  You have 60 seconds to adjust the setup.                    ║
+╚════════════════════════════════════════════════════════════════╝
+⏰ 60 seconds remaining...
+⏰ 50 seconds remaining...
+⏰ 40 seconds remaining...
+⏰ 30 seconds remaining...
+⏰ 20 seconds remaining...
+⏰ 10 seconds remaining...
+
+▶️  Starting Static Pressure Test (2 minutes)
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  🔬 TEST 1: STATIC PRESSURE TEST                              ║
+║  ──────────────────────────────────────────────────────────── ║
+║  Instructions: Hold steady pressure on the sensor            ║
+║  Duration: 120 seconds                                        ║
+╚════════════════════════════════════════════════════════════════╝
+
+⏱️  Recording for 120 seconds at 50 Hz...
+   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  📊 TEST RESULTS: Static Pressure                          ║
+╠════════════════════════════════════════════════════════════════╣
+║  Total samples recorded: 6000                                   ║
+║  Valid samples (≥1000):   6000                                   ║
+║  ════════════════════════════════════════════════════════════ ║
+║  Minimum value:           2543                                   ║
+║  Maximum value:           3055                                   ║
+║  Range (max-min):         512                                    ║
+║  Mean (average):          2939                                   ║
+║  Std Deviation:           32.26                                  ║
+║  Coefficient of Variation: 1.10                                % ║
+╚════════════════════════════════════════════════════════════════╝
+
+📈 NOISE DISTRIBUTION HISTOGRAM:
+                 ████  
+   ↑   ↑   ↑   ↑   
+   2543 2668 2793 2918 
+
+✅ Static Pressure Test completed.
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  ⚠️  PREPARING TEST 2: DYNAMIC PRESSURE                       ║
+║  ──────────────────────────────────────────────────────────── ║
+║  Tap and squeeze the sensor repeatedly.                      ║
+║  Maintain a steady rhythm (e.g., one tap every 2-3 seconds). ║
+║  You have 60 seconds to get ready.                           ║
+╚════════════════════════════════════════════════════════════════╝
+⏰ 60 seconds remaining...
+⏰ 50 seconds remaining...
+⏰ 40 seconds remaining...
+⏰ 30 seconds remaining...
+⏰ 20 seconds remaining...
+⏰ 10 seconds remaining...
+
+▶️  Starting Dynamic Pressure Test (2 minutes)
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  🔬 TEST: DYNAMIC PRESSURE (2 MINUTES)                       ║
+║  ──────────────────────────────────────────────────────────── ║
+║  Instructions: Tap the sensor rhythmically                   ║
+║  (e.g., once every 2 seconds) for 2 minutes                 ║
+╚════════════════════════════════════════════════════════════════╝
+
+⏱️  Recording for 120 seconds at 50 Hz...
+   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  📊 TEST RESULTS: Dynamic Pressure                         ║
+╠════════════════════════════════════════════════════════════════╣
+║  Total samples recorded: 6000                                   ║
+║  Valid samples (≥1000):   3345                                   ║
+║  ════════════════════════════════════════════════════════════ ║
+║  Minimum value:           1038                                   ║
+║  Maximum value:           3677                                   ║
+║  Range (max-min):         2639                                   ║
+║  Mean (average):          3266                                   ║
+║  Std Deviation:           332.83                                 ║
+║  Coefficient of Variation: 10.19                               % ║
+╚════════════════════════════════════════════════════════════════╝
+
+📈 NOISE DISTRIBUTION HISTOGRAM:
+                █ ████ 
+   ↑   ↑   ↑   ↑   
+   1038 1693 2348 3003 
+
+⚡ Fastest response time: 25060 ms
+📊 Approximate press count: 19
+✅ Dynamic Pressure Test completed.
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  ⚠️  PREPARING TEST 3: VIBRATION SENSITIVITY                 ║
+║  ──────────────────────────────────────────────────────────── ║
+║  Tap and shake the wires/sensor during the test.             ║
+║  Vary the intensity of vibrations.                           ║
+║  You have 60 seconds to adjust.                              ║
+╚════════════════════════════════════════════════════════════════╝
+⏰ 60 seconds remaining...
+⏰ 50 seconds remaining...
+⏰ 40 seconds remaining...
+⏰ 30 seconds remaining...
+⏰ 20 seconds remaining...
+⏰ 10 seconds remaining...
+
+▶️  Starting Vibration Sensitivity Test (2 minutes)
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  🔬 TEST 3: VIBRATION SENSITIVITY TEST                        ║
+║  ──────────────────────────────────────────────────────────── ║
+║  Instructions: Tap and shake the wires/sensor during test    ║
+║  Duration: 120 seconds                                        ║
+╚════════════════════════════════════════════════════════════════╝
+
+⏱️  Recording for 120 seconds at 100 Hz...
+   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  📊 TEST RESULTS: Vibration Test                           ║
+╠════════════════════════════════════════════════════════════════╣
+║  Total samples recorded: 12000                                  ║
+║  Valid samples (≥1000):   12000                                  ║
+║  ════════════════════════════════════════════════════════════ ║
+║  Minimum value:           3027                                   ║
+║  Maximum value:           3549                                   ║
+║  Range (max-min):         522                                    ║
+║  Mean (average):          3446                                   ║
+║  Std Deviation:           25.91                                  ║
+║  Coefficient of Variation: 0.75                                % ║
+╚════════════════════════════════════════════════════════════════╝
+
+📈 NOISE DISTRIBUTION HISTOGRAM:
+                 ████  
+   ↑   ↑   ↑   ↑   
+   3027 3157 3287 3417 
+
+
+📊 Vibration Analysis:
+   • Significant events detected: 257
+   • Event rate: 2.1 events/second
+✅ Vibration Sensitivity Test completed.
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  ⚠️  PREPARING TEST 4: TEMPERATURE EFFECT                     ║
+║  ──────────────────────────────────────────────────────────── ║
+║  Place a weight (e.g., a glass of water) on the sensor.      ║
+║  First we'll record with room‑temperature water.             ║
+║  You have 60 seconds to adjust the setup.                    ║
+╚════════════════════════════════════════════════════════════════╝
+⏰ 60 seconds remaining...
+⏰ 50 seconds remaining...
+⏰ 40 seconds remaining...
+⏰ 30 seconds remaining...
+⏰ 20 seconds remaining...
+⏰ 10 seconds remaining...
+
+▶️  Recording baseline (room temp) for 2 minutes...
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  🔬 TEST 1: STATIC PRESSURE TEST                              ║
+║  ──────────────────────────────────────────────────────────── ║
+║  Instructions: Hold steady pressure on the sensor            ║
+║  Duration: 120 seconds                                        ║
+╚════════════════════════════════════════════════════════════════╝
+
+⏱️  Recording for 120 seconds at 50 Hz...
+   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  📊 TEST RESULTS: Static Pressure                          ║
+╠════════════════════════════════════════════════════════════════╣
+║  Total samples recorded: 6000                                   ║
+║  Valid samples (≥1000):   6000                                   ║
+║  ════════════════════════════════════════════════════════════ ║
+║  Minimum value:           3450                                   ║
+║  Maximum value:           3548                                   ║
+║  Range (max-min):         98                                     ║
+║  Mean (average):          3489                                   ║
+║  Std Deviation:           5.59                                   ║
+║  Coefficient of Variation: 0.16                                % ║
+╚════════════════════════════════════════════════════════════════╝
+
+📈 NOISE DISTRIBUTION HISTOGRAM:
+          █████        
+   ↑   ↑   ↑   ↑   
+   3450 3470 3490 3510 
+
+
+🌡️  Now replace the glass with warm water (approx. 40‑50°C).
+   Wait 60 seconds for temperature to stabilise.
+⏰ 60 seconds remaining...
+⏰ 50 seconds remaining...
+⏰ 40 seconds remaining...
+⏰ 30 seconds remaining...
+⏰ 20 seconds remaining...
+⏰ 10 seconds remaining...
+
+▶️  Recording warm water condition for 2 minutes...
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  🔬 TEST 1: STATIC PRESSURE TEST                              ║
+║  ──────────────────────────────────────────────────────────── ║
+║  Instructions: Hold steady pressure on the sensor            ║
+║  Duration: 120 seconds                                        ║
+╚════════════════════════════════════════════════════════════════╝
+
+⏱️  Recording for 120 seconds at 50 Hz...
+   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  📊 TEST RESULTS: Static Pressure                          ║
+╠════════════════════════════════════════════════════════════════╣
+║  Total samples recorded: 6000                                   ║
+║  Valid samples (≥1000):   6000                                   ║
+║  ════════════════════════════════════════════════════════════ ║
+║  Minimum value:           3096                                   ║
+║  Maximum value:           3283                                   ║
+║  Range (max-min):         187                                    ║
+║  Mean (average):          3201                                   ║
+║  Std Deviation:           42.09                                  ║
+║  Coefficient of Variation: 1.31                                % ║
+╚════════════════════════════════════════════════════════════════╝
+
+📈 NOISE DISTRIBUTION HISTOGRAM:
+      ███████████████  
+   ↑   ↑   ↑   ↑   
+   3096 3141 3186 3231 
+
+✅ Temperature test complete.
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  ⚠️  PREPARING TEST 5: HUMIDITY EFFECT                        ║
+║  ──────────────────────────────────────────────────────────── ║
+║  Keep the same weight on the sensor.                         ║
+║  First record with dry sensor.                                ║
+║  You have 60 seconds to ensure the setup is stable.          ║
+╚════════════════════════════════════════════════════════════════╝
+⏰ 60 seconds remaining...
+⏰ 50 seconds remaining...
+⏰ 40 seconds remaining...
+⏰ 30 seconds remaining...
+⏰ 20 seconds remaining...
+⏰ 10 seconds remaining...
+
+▶️  Recording dry condition for 2 minutes...
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  🔬 TEST 1: STATIC PRESSURE TEST                              ║
+║  ──────────────────────────────────────────────────────────── ║
+║  Instructions: Hold steady pressure on the sensor            ║
+║  Duration: 120 seconds                                        ║
+╚════════════════════════════════════════════════════════════════╝
+
+⏱️  Recording for 120 seconds at 50 Hz...
+   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  📊 TEST RESULTS: Static Pressure                          ║
+╠════════════════════════════════════════════════════════════════╣
+║  Total samples recorded: 6000                                   ║
+║  Valid samples (≥1000):   6000                                   ║
+║  ════════════════════════════════════════════════════════════ ║
+║  Minimum value:           2771                                   ║
+║  Maximum value:           2907                                   ║
+║  Range (max-min):         136                                    ║
+║  Mean (average):          2843                                   ║
+║  Std Deviation:           36.75                                  ║
+║  Coefficient of Variation: 1.29                                % ║
+╚════════════════════════════════════════════════════════════════╝
+
+📈 NOISE DISTRIBUTION HISTOGRAM:
+     ██████ ████  ███ █
+   ↑   ↑   ↑   ↑   
+   2771 2801 2831 2861 
+
+
+💧 Now carefully add a few water drops on the sensor surface.
+   Make sure the weight remains in place.
+   You have 60 seconds to adjust.
+⏰ 60 seconds remaining...
+⏰ 50 seconds remaining...
+⏰ 40 seconds remaining...
+⏰ 30 seconds remaining...
+⏰ 20 seconds remaining...
+⏰ 10 seconds remaining...
+
+▶️  Recording with moisture for 2 minutes...
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  🔬 TEST 1: STATIC PRESSURE TEST                              ║
+║  ──────────────────────────────────────────────────────────── ║
+║  Instructions: Hold steady pressure on the sensor            ║
+║  Duration: 120 seconds                                        ║
+╚════════════════════════════════════════════════════════════════╝
+
+⏱️  Recording for 120 seconds at 50 Hz...
+   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  📊 TEST RESULTS: Static Pressure                          ║
+╠════════════════════════════════════════════════════════════════╣
+║  Total samples recorded: 6000                                   ║
+║  Valid samples (≥1000):   6000                                   ║
+║  ════════════════════════════════════════════════════════════ ║
+║  Minimum value:           3413                                   ║
+║  Maximum value:           3533                                   ║
+║  Range (max-min):         120                                    ║
+║  Mean (average):          3479                                   ║
+║  Std Deviation:           9.96                                   ║
+║  Coefficient of Variation: 0.29                                % ║
+╚════════════════════════════════════════════════════════════════╝
+
+📈 NOISE DISTRIBUTION HISTOGRAM:
+         █ ██████      
+   ↑   ↑   ↑   ↑   
+   3413 3443 3473 3503 
+
+✅ Humidity test complete.
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  ⚠️  PREPARING TEST 6: TIME DRIFT (10 minutes)                ║
+║  ──────────────────────────────────────────────────────────── ║
+║  Ensure constant pressure (e.g., the same weight) remains    ║
+║  on the sensor. Do not disturb the setup for the next 10 min.║
+║  You have 60 seconds to finalise.                            ║
+╚════════════════════════════════════════════════════════════════╝
+⏰ 60 seconds remaining...
+⏰ 50 seconds remaining...
+⏰ 40 seconds remaining...
+⏰ 30 seconds remaining...
+⏰ 20 seconds remaining...
+⏰ 10 seconds remaining...
+
+▶️  Starting 10‑minute time drift test...
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  🔬 TEST 6: TIME DRIFT TEST                                   ║
+║  ──────────────────────────────────────────────────────────── ║
+║  Instructions: Apply constant pressure for 10 minutes        ║
+║  Keep pressure consistent throughout the test                ║
+╚════════════════════════════════════════════════════════════════╝
+
+⏱️  Recording for 10 minutes at 1 Hz...
+   ▓▓▓▓▓▓▓▓▓▓
+
+
+╔════════════════════════════════════════════════════════════════╗
+║  📊 TEST RESULTS: Time Drift                               ║
+╠════════════════════════════════════════════════════════════════╣
+║  Total samples recorded: 600                                    ║
+║  Valid samples (≥1000):   600                                    ║
+║  ════════════════════════════════════════════════════════════ ║
+║  Minimum value:           3385                                   ║
+║  Maximum value:           3527                                   ║
+║  Range (max-min):         142                                    ║
+║  Mean (average):          3493                                   ║
+║  Std Deviation:           10.35                                  ║
+║  Coefficient of Variation: 0.30                                % ║
+╚════════════════════════════════════════════════════════════════╝
+
+📈 NOISE DISTRIBUTION HISTOGRAM:
+                █████  
+   ↑   ↑   ↑   ↑   
+   3385 3420 3455 3490 
+
+
+📈 Time Drift Summary:
+   • First 10 seconds avg: 3480
+   • Last 10 seconds avg: 3505
+   • Drift over 10 minutes: +25 (0.72%)
+   • Maximum sample-to-sample jump: 126
+✅ Time drift test complete.
+
+
