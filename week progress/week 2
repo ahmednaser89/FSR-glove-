@@ -1,11 +1,11 @@
-• Validate the performance of candidate FSR sensors.
+• Validate the performance of many units os same FSR interlink
 • Evaluate sensor noise characteristics under various conditions.
 • Investigate the effect of bending sensor leads and sensing areas.
 • Evaluate sensor behavior on curved surfaces similar to human fingertips.
 • Build a bench test circuit for FSR sensors.
 • Perform signal measurements and noise analysis.
 • Characterize sensor response across different force levels.
-• Test wiring behavior under bending and mechanical stress.
+• Test wiring behavior under bending .
 • Video demonstration showing the bench test circuit and sensor responses.
 • Basic documentation describing sensor behavior and initial findings.
 
@@ -14,4 +14,4 @@ android,ios(single fsr with calibration)
 firmware esp32-s3 full (8 fsr with calibration)
 preparing for production  
 
-all phases  almost done (there's extra things added not in  phases as windows, linux, mac apps and calibration)
+all phases  almost done  80% (there's extra things added not in  phases as windows, linux, mac apps and calibration)
